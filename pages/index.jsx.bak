@@ -1,0 +1,97 @@
+import Head from 'next/head'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+// import CardDeck from 'react-bootstrap/CardDeck'
+
+import Layout from '../layouts/BasicLayout.js'
+
+// import sanityClient, { getSanityContent } from '../utils/sanityClient';
+
+import DesignCard from '../components/DesignCard'
+
+import styles from '../styles/CardDeck.module.scss';
+
+import { DataStore } from 'aws-amplify'
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { Design } from '../models'
+
+
+const IndexPage = () => {
+  const [posts, setPosts] = useState([])
+  useEffect(() => {
+    fetchPosts()
+    async function fetchPosts() {
+      const postData = await DataStore.query(Design)
+      setPosts(postData)
+    }
+    DataStore.observe(Design).subscribe(() => fetchPosts())
+  }, [])
+
+  return (
+    <>
+      <Head>
+        <title>HoistUp</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <Layout>
+        <Container fluid className='h-100 content root'>
+          <Row className='h-100'>
+            <Col md={{span: 10, offset:1}}>
+              {/* <CardDeck className={styles.deck}>
+                {designs.map(design => (<DesignCard key={design.id} {...design} />))}
+              </CardDeck> */}
+              <h1>Designs</h1>
+              {
+        posts.map(post => (
+          <Link href={`/posts/${post.id}`}>
+            <a>
+              <h2>{post.title}</h2>
+            </a>
+          </Link>
+        ))
+      }
+            </Col>
+          </Row>
+        </Container>
+      </Layout>
+    </>
+  )
+}
+
+export default IndexPage
+
+// export async function getStaticProps() {
+//   const data = await getSanityContent({
+//     query: `
+//       query AllDesigns {
+//         allDesign {
+//           title
+//           slug {
+//             current
+//           }
+//         }
+//       }
+//     `,
+//   });
+//   console.log(data)
+
+//   const designs = await sanityClient.fetch(`
+//     *[_type == 'design'] | order(creationDate asc){
+//       _id,
+//       title,
+//       'slug': slug.current,
+//       keyImage
+//     }
+//   `);
+
+//   // console.log(designs)
+
+//   return {
+//     props: {
+//       designs
+//     }
+//   }
+// }

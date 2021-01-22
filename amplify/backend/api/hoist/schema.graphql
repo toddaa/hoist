@@ -1,0 +1,32 @@
+type Image @model @auth(rules: [{allow: public, operations: [create, read]}]) @key(name: "byDesign", fields: ["designID"]) {
+  id: ID!
+  url: String!
+  altText: String
+  designID: ID!
+}
+
+type Comment @model @key(name: "byDesign", fields: ["designID"]) @auth(rules: [{allow: public, operations: [create, read]}]) {
+  id: ID!
+  text: String!
+  comment_timestamp: AWSTimestamp!
+  Author: Author! @connection
+  designID: ID!
+}
+
+type Author @model @auth(rules: [{allow: public, operations: [create, read]}]) {
+  id: ID!
+  name: String!
+  email: String
+}
+
+type Design @model @auth(rules: [{allow: public, operations: [create, read]}]) {
+  id: ID!
+  title: String!
+  slug: String!
+  release_date: AWSTimestamp!
+  tags: String
+  Author: Author! @connection
+  Comments: [Comment] @connection(keyName: "byDesign", fields: ["id"])
+  summary: String
+  Images: [Image] @connection(keyName: "byDesign", fields: ["id"])
+}
