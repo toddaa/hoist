@@ -179,7 +179,7 @@ export async function getStaticPaths(req) {
   const paths = designs.map(({slug}) => `/design/${slug}`)
   return {
     paths,
-    fallback: true,
+    fallback: false,
   }
 }
 
