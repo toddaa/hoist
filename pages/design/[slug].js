@@ -173,26 +173,39 @@ const DesignPage = ({ design }) => {
 
 export default DesignPage
 
-export async function getStaticPaths(req) {
-  const { DataStore } = withSSRContext(req)
-  const designs = await DataStore.query(Design)
-  const paths = designs.map(({slug}) => `/design/${slug}`)
-  return {
-    paths,
-    fallback: false,
-  }
-}
+// export async function getStaticPaths(req) {
+//   const { DataStore } = withSSRContext(req)
+//   const designs = await DataStore.query(Design)
+//   const paths = designs.map(({slug}) => `/design/${slug}`)
+//   return {
+//     paths,
+//     fallback: false,
+//   }
+// }
 
-export async function getStaticProps (req) {
+// export async function getStaticProps (req) {
+//   const { DataStore } = withSSRContext(req)
+//   const { params } = req
+//   const { slug } = params
+//   const design = await DataStore.query(Design, c => c.slug("eq", slug))
+
+//   return {
+//     props: {
+//       design: JSON.parse(JSON.stringify(design))[0]
+//     },
+//     revalidate: 100
+//   }
+// }
+
+export async function getServerSideProps (req){
   const { DataStore } = withSSRContext(req)
   const { params } = req
   const { slug } = params
   const design = await DataStore.query(Design, c => c.slug("eq", slug))
-
+  // console.log(design)
   return {
     props: {
       design: JSON.parse(JSON.stringify(design))[0]
-    },
-    revalidate: 100
+    }
   }
 }
