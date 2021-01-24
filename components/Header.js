@@ -5,6 +5,9 @@ import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+
+import styles from '../styles/Header.module.scss';
+
 const iconSearch = (
   <FontAwesomeIcon icon={['fas', 'search']} className='fa-fw' />
 )
@@ -28,8 +31,8 @@ const Header = (props) => {
   }
 
   return (
-    <Navbar bg="dark" expanded className='navbar-dark' fixed={fixedVal}>
-      <Navbar.Brand href='/'>Title</Navbar.Brand>
+    <Navbar bg="dark" expanded className={`navbar-dark`} fixed={fixedVal}>
+      <Navbar.Brand href='/'>Hoist</Navbar.Brand>
       <Navbar.Toggle aria-controls="navbarSupportedContent" />
       <Navbar.Collapse id='navbarSupportedContent'>
         <Nav className='ml-auto'>
@@ -37,7 +40,7 @@ const Header = (props) => {
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="success">{iconSearch} Search</Button>
           </Form>
-          {auth ?
+          {/* {auth ?
               <>
                 <Nav.Link href="/admin" className='nav-item'>{iconAdmin} Admin</Nav.Link>
                 <Nav.Link className='nav-item'>{iconSearch} Profile</Nav.Link>
@@ -46,7 +49,7 @@ const Header = (props) => {
               <>
                 <Nav.Link className='nav-item'>{iconLogin} Login</Nav.Link>
               </>
-          }
+          } */}
         </Nav>
       </Navbar.Collapse>
     </Navbar>

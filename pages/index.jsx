@@ -12,7 +12,6 @@ import styles from '../styles/CardDeck.module.scss';
 
 import { DataStore } from 'aws-amplify'
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
 import { Design } from '../models'
 
 
@@ -39,9 +38,9 @@ const IndexPage = () => {
         <Container fluid className='h-100 content root'>
           <Row className='h-100'>
             <Col md={{span: 10, offset:1}}>
-              <CardDeck className={styles.deck}>
+              <div className={styles.deck}>
                 {designs.map((design,i) => (<DesignCard key={design.id} {...design} />))}
-              </CardDeck>
+              </div>
             </Col>
           </Row>
         </Container>
@@ -51,36 +50,3 @@ const IndexPage = () => {
 }
 
 export default IndexPage
-
-// export async function getStaticProps() {
-//   const data = await getSanityContent({
-//     query: `
-//       query AllDesigns {
-//         allDesign {
-//           title
-//           slug {
-//             current
-//           }
-//         }
-//       }
-//     `,
-//   });
-//   console.log(data)
-
-//   const designs = await sanityClient.fetch(`
-//     *[_type == 'design'] | order(creationDate asc){
-//       _id,
-//       title,
-//       'slug': slug.current,
-//       keyImage
-//     }
-//   `);
-
-//   // console.log(designs)
-
-//   return {
-//     props: {
-//       designs
-//     }
-//   }
-// }

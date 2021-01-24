@@ -10,6 +10,11 @@
       "StackName": "amplify-hoist-staging-171550",
       "StackId": "arn:aws:cloudformation:us-east-1:688909397292:stack/amplify-hoist-staging-171550/7a5f7dc0-5cd5-11eb-a2d8-0ecb50cc3755",
       "AmplifyAppId": "dptig3d6n12mu"
+    },
+    "categories": {
+      "auth": {
+        "hoista82c4fc8": {}
+      }
     }
   }
 }

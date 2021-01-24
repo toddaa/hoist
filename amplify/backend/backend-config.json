@@ -20,5 +20,19 @@
         }
       }
     }
+  },
+  "auth": {
+    "hoista82c4fc8": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "storage": {
+    "s3455e7eaa": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }
